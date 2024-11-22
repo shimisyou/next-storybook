@@ -1,14 +1,15 @@
 version: "3.9"
 
 services:
-  frontend:
+  app:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
     ports:
       - "3000:3000"
+      - "6006:6006"
     volumes:
-      - ./frontend:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./frontend:/app
+      - /app/node_modules
     environment:
-      - WATCHPACK_POLLING=true
+      WATCHPACK_POLLING: "true" # ホットリロードのための環境変数
+    command: sh -c "npm run dev & npm run storybook"
