@@ -6,10 +6,21 @@ services:
       context: .
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      WATCHPACK_POLLING: "true"
+    command: npm run dev
+
+  storybook:
+    build:
+      context: .
+    ports:
       - "6006:6006"
     volumes:
       - ./frontend:/app
       - /app/node_modules
     environment:
-      WATCHPACK_POLLING: "true" # ホットリロードのための環境変数
-    command: sh -c "npm run dev & npm run storybook"
+      WATCHPACK_POLLING: "true"
+    command: npm run storybook
