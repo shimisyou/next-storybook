@@ -2,6 +2,8 @@
   "recommendations": [
     "wix.vscode-import-cost",
     "streetsidesoftware.code-spell-checker",
-    "oderwat.indent-rainbow"
+    "oderwat.indent-rainbow",
+    "formulahendry.auto-rename-tag",
+    "dsznajder.es7-react-js-snippets"
   ]
 }
