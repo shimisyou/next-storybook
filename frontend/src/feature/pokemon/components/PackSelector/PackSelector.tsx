@@ -5,9 +5,9 @@ import { PokemonPackItem } from "@/feature/types/pokemon";
 import { PackCarousel } from "../PackCarousel/PackCarousel";
 
 type PackSelectorProps = {
-  packs: PokemonPackItem[];
-  title: string;
-  operationArea?: (pack: PokemonPackItem | null) => ReactNode;
+  packs: PokemonPackItem[]; // パックのリスト
+  title: string; // タイトル
+  operationArea?: (pack?: PokemonPackItem) => ReactNode; // 選択されたパックを操作するUI
 };
 
 export const PackSelector = ({
@@ -29,9 +29,16 @@ export const PackSelector = ({
           flexDirection="column"
           gap={2}
         >
+          {/* タイトル */}
           <Typography variant="h6">{title}</Typography>
+
+          {/* カルーセル */}
           <PackCarousel packs={packs} onSelect={setSelectedPack} />
-          {operationArea && <Box>{operationArea(selectedPack)}</Box>}
+
+          {/* 操作エリア */}
+          {operationArea && selectedPack && (
+            <Box mt={2}>{operationArea(selectedPack)}</Box>
+          )}
         </Box>
       </CardContent>
     </Card>
