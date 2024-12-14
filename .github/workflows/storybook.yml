@@ -14,27 +14,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # リポジトリをチェックアウト
+      # 1. リポジトリをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Node.jsのセットアップ
+      # 2. Node.jsのセットアップ
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20 # 使用しているNode.jsバージョンに合わせる
 
-      # 依存関係のインストール
+      # 3. 依存関係のインストール
       - name: Install dependencies
+        working-directory: frontend # frontendディレクトリ内で実行
         run: npm install
 
-      # Storybookのビルド
+      # 4. Storybookのビルド
       - name: Build Storybook
+        working-directory: frontend # frontendディレクトリ内で実行
         run: npm run build-storybook
 
-      # ビルド結果をGitHub Pagesにデプロイ
+      # 5. ビルド結果をGitHub Pagesにデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: storybook-static
+          publish_dir: frontend/storybook-static # frontend内のビルド結果を指定
